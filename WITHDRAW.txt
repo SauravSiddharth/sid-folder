@@ -1,0 +1,94 @@
+/*******************************************************************************************************
+ * File                	 	: name which u saved
+ * Author Name          	: Capgemini
+ * Desc                	 	: Program to apply bill on electricity of given customer number
+ * Version            	 	: 1.0
+ * Last Modified Date   	: 03-jun-2017
+ * Change Description   	: checking whether customer name and account number
+ **************************************************************
+
+START
+	DECLARE CUSTOMER_NAME AS VARCHAR(10)
+	DECLARE ACCOUNT_NUMBER,pin AS INTEGER(10)
+	DECLARE WITHDRAW_AMOUNT AS REAL(10)
+	DECLARE CURRENT_BALANCE AS REAL(10)
+	PROMPT " ENTER YOUR ACCOUNT NUMBER" STORE IN ACCOUNT__NUMBER
+	IF(iSVALID(ACCOUNT_NUMBER)) THEN
+	 	PROMPT " ENTER CUSTOMER NAME" STORE IN CUSTOMER_NAME
+		IF(CHECK(CUSTOMER_NAME)) THEN
+                    PROMPT" ENTER your pin"
+			IF(isValid(pin)) Then
+                          PROMPT "enter the amount to be withdrawal" store in withdraw_amount
+				IF(isValid(withdraw_amount)) then
+                                     applyWithdraw(withdraw_amount)
+                                         PRINTT " PLZ WAIT COLLECT CASH"
+				ELSE
+				    PRINT " TRANSACTION FAILED"
+                                 ENDIF
+                         ELSE
+			   PRINT " ENTERD PIN IS INCORRECT"
+                         ENDIF
+                 ELSE
+			PRINT " ENTERED CUST_NAME IS INVALID"
+		 ENDIF
+        ELSE
+          PRINT " ENETERED ACCOUNT NUMBER IS INVALID"
+        ENDIF
+END
+
+/*********************************************************************
+* Module Name         	: applyWithdraw()
+* Input Parameters    	: data
+* Return Type         	: REAL
+* Author              	: Capgemini
+* Creation Date      	: 03-june-2017
+* Description        	: checking amount entered by customer whether it is valid or not
+ **************************************************************
+SUB applyWithdraw(amount)
+IF(current_balance>amount) then
+ 	RETURN amount
+else
+ 	print "insufficient balance"
+ENDIF
+ENDSUB
+
+/*********************************************************************
+* Module Name         	: isValid()
+* Input Parameters      : data
+* Return Type        	: BOOLEAN
+* Author             	: Capgemini
+* Creation Date       	: 03-june-2017
+* Description         	: To validate data for accepting only digits
+ *********************************************************************/
+
+
+SUB isValid(data)
+	IF(isDigits(data)) THEN
+		RETURN true
+	ELSE	
+		RETURN false
+
+	END IF
+END SUB
+/*********************************************************************
+* Module Name         	: check()
+* Input Parameters      : data
+* Return Type        	: BOOLEAN
+* Author             	: Capgemini
+* Creation Date       	: 03-june-2017
+* Description         	: To validate data for accepting only alphabetics
+ ***********************************************************************
+SUB check(data)
+ IF(isalpha(data)) Then
+	RETURN true
+ ELSE
+	RETURN false
+END IF
+
+						
+                      
+change variables names   function names and description as your wish 	
+
+exception
+  	when noamount then
+	print "errormsg"

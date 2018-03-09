@@ -1,0 +1,88 @@
+/*******************************************************************************************************
+ * File                	 	: (name of ur file).txt
+ * Author Name          	: Capgemini
+ * Desc                	 	: Program to apply bill on service of vehicle taken by customer
+ * Version            	 	: 1.0
+ * Last Modified Date   	: 18-May-2017
+ * Change Description   	: checking whether customer name,type of vehicle and type of service valid or not
+ *******************************************************************************************************/
+START
+	
+	DECLARE customer_name as varchar(10)
+	DECLARE type_of_service as  varchar(10)
+        DECLARE type_of_vehicle as  varchar(10)
+        DECLARE cost_of_service as  real(10)
+        DECLARE cost_of_vehicle as  real(10)
+	PROMPT "enter the costumer name" store in customer_name
+	If(isValid(customer_name)) THEN
+		PROMPT "enter type of vehicle" store in type_of_vehicle
+           If(isValid(type_of_vehicle)) THEN
+		prompt "enter cost of vehicle" store in cost_of_vehicle
+                If(isValid(cost_of_vehicle))then
+		PROMPT "enter type of service taken" store in type_of_service
+		If(isValid(type_of_service) THEN
+		     applyBill(type_of_vehicle,type_of_service,cost_of_vehicle)
+		ELSE
+			PRINT " entered type_of_service invalid"
+		ENDIF
+		ELSE
+			PRINT " PLease enter valid COST"
+                ENDIF
+	   else 
+	     pRint "entered vehicle type is not valid"
+	   ENDIF
+	else
+	     PRINT "entered customer name is invalid"
+	
+	ENDIF
+END
+
+/*********************************************************************
+* Module Name         	: applyBill()
+* Input Parameters    	: data
+* Return Type         	: REAL
+* Author              	: Capgemini
+* Creation Date      	: 18-May-2017
+* Description        	: Applying bill on the electricity
+ *********************************************************************/
+
+SUB applyBill(type_of_vehicle,type_of_service,cost_of_vehicle)
+DECLARE result as real(10)
+if(t_o_v=all && t_o_s=free) then
+      result=200
+elseif(t_o_v=hatchback && t_o_s=BR)
+     result=15/100*cost_of_vehicle
+elseif(t_o_v=smallcars && t_o_s=BR)
+     result=10/100*cost_of_vehicle
+elseif(t_o_v=sedan&& t_o_s=BR)
+     result=18/100*cost_of_vehicle
+
+endif
+print "vehicle bill" +result
+EXCEPTION
+	when NoSuchElement THEN
+	PRINT errormessage
+ENDSUB
+
+/*********************************************************************
+* Module Name         	: isValid()
+* Input Parameters      : data
+* Return Type        	: BOOLEAN
+* Author             	: Capgemini
+* Creation Date       	: 17-May-2017
+* Description         	: To validate data for accepting only digits
+ *********************************************************************/
+
+
+SUB isValid(data)
+	IF(isAlpha(data)) THEN
+		RETURN true
+	ELSEif(isDigits(data)) then	
+		RETURN true
+	else 
+              RETURN false
+	END IF
+END SUB
+
+
+	 
